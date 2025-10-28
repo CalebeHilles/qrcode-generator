@@ -1,1 +1,11 @@
 @import "tailwindcss";
+
+:root {
+  --bg-2: #f9f9f9;
+  --fg-2: #1a1a1a;
+}
+
+form {
+  background-color: var(--bg-2);
+  color: var(--fg-2);
+}
