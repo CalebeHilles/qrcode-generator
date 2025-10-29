@@ -1,18 +1,24 @@
 import { HelpCircle } from "lucide-react";
-import { useState } from "react";
 
-export default function Checkbox({ label }: { label: string }) {
-  const [checked, setChecked] = useState(false);
-
+export default function Checkbox({
+  label,
+  data,
+  onChange,
+}: {
+  label: string;
+  data: boolean;
+  onChange: (value: boolean) => void;
+}) {
   return (
     <div className="flex gap-1">
       <div>
         <label className="flex items-center gap-2 cursor-pointer w-fit">
           <input
+            required
             type="checkbox"
-            checked={checked}
+            checked={data}
             className="w-4 h-4 cursor-pointer"
-            onChange={(e) => setChecked(e.target.checked)}
+            onChange={(e) => onChange(e.target.checked)}
           />
           <span className="text-neutral-700">{label}</span>
         </label>
