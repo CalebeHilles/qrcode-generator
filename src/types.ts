@@ -7,4 +7,11 @@ export interface FormData {
   hidden: boolean;
 }
 
+export interface WifiConfig {
+  ssid: string;
+  securityType: "WPA" | "nopass";
+  pass: string;
+  isHidden: boolean;
+}
+
 export type SetFormData = React.Dispatch<React.SetStateAction<FormData>>;
