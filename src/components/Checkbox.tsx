@@ -14,7 +14,6 @@ export default function Checkbox({
       <div>
         <label className="flex items-center gap-2 cursor-pointer w-fit">
           <input
-            required
             type="checkbox"
             checked={data}
             className="w-4 h-4 cursor-pointer"
