@@ -37,7 +37,7 @@ function App() {
           <QRCodeForm
             data={formData}
             setData={setFormData}
-            display={formData.noPass ? "hidden" : "flex"}
+            noPass={formData.noPass ? true : false}
             handleSubmit={handleSubmit}
           />
         </div>

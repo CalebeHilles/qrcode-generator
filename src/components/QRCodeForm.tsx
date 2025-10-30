@@ -5,26 +5,26 @@ import TextInput from "../components/TextInput";
 export default function QRCodeForm({
   data,
   setData,
-  display,
+  noPass,
   handleSubmit,
 }: {
   data: FormData;
   setData: SetFormData;
-  display: string;
+  noPass: boolean;
   handleSubmit: (e: React.FormEvent<Element>) => Promise<void>;
 }) {
   const textInputs = [
     {
       key: "ssid" as const,
-      label: "Rede",
+      label: "Nome da rede (SSID)",
       placeholder: "Digite o nome da rede",
-      display: "flex",
+      noPass: false,
     },
     {
       key: "pass" as const,
       label: "Senha",
       placeholder: "Digite a senha",
-      display: display,
+      noPass: noPass,
     },
   ];
 
@@ -53,7 +53,7 @@ export default function QRCodeForm({
             onChange={(value) => setData({ ...data, [input.key]: value })}
             label={input.label}
             placeholder={input.placeholder}
-            display={input.display}
+            noPass={input.noPass}
           />
         ))}
         <div>

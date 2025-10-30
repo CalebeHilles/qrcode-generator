@@ -2,17 +2,17 @@ export default function TextInput({
   label,
   placeholder,
   data,
-  display,
+  noPass,
   onChange,
 }: {
   label: string;
   placeholder: string;
   data: string;
-  display: string;
+  noPass: boolean;
   onChange: (value: string) => void;
 }) {
-  return (
-    <div className={`${display} flex-col gap-1`}>
+  return noPass ? null : (
+    <div className="flex flex-col gap-1">
       <label className="text-neutral-700">{label}:</label>
       <input
         value={data}
