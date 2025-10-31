@@ -12,7 +12,7 @@ export default function TextInput({
   onChange: (value: string) => void;
 }) {
   return noPass ? null : (
-    <div className="flex flex-col gap-1">
+    <div className="flex flex-col gap-1 text-xs sm:text-sm">
       <label className="text-neutral-700">{label}:</label>
       <input
         value={data}

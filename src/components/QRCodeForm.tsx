@@ -40,12 +40,12 @@ export default function QRCodeForm({
   ];
 
   return (
-    <div>
+    <div className="w-full">
       <form
         onSubmit={handleSubmit}
-        className="flex flex-col justify-center py-4 px-8 rounded-md shadow-lg h-96 shadow-zinc-950 gap-4"
+        className="flex flex-col justify-center py-4 px-4 sm:px-8 rounded-md shadow-lg sm:min-h-84 shadow-zinc-950 gap-4"
       >
-        <h3 className="text-2xl text-zinc-900">Criar QRcode</h3>
+        <h3 className="text-md sm:text-lg text-zinc-900">Criar QRcode</h3>
         {textInputs.map((input) => (
           <TextInput
             key={input.key}
@@ -66,7 +66,7 @@ export default function QRCodeForm({
             />
           ))}
         </div>
-        <button className="text-zinc-100" type="submit">
+        <button className="text-zinc-100 bg-zinc-900 hover:bg-purple-700 text-sm sm:text-md" type="submit">
           Gerar
         </button>
       </form>

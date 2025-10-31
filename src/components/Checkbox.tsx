@@ -10,7 +10,7 @@ export default function Checkbox({
   onChange: (value: boolean) => void;
 }) {
   return (
-    <div className="flex gap-1">
+    <div className="flex gap-1 text-xs sm:text-sm">
       <div>
         <label className="flex items-center gap-2 cursor-pointer w-fit">
           <input
