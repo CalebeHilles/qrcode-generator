@@ -1,4 +1,4 @@
-import { ArrowBigRight } from "lucide-react";
+import { ArrowBigDown } from "lucide-react";
 
 export default function QRCodeDisplay({
   qrCodeUrl,
@@ -8,18 +8,14 @@ export default function QRCodeDisplay({
   qrCodeUrl: string;
 }) {
   return (
-    <div className="flex flex-col lg:flex-row items-center sm:gap-8">
-      <ArrowBigRight className="hidden lg:block w-16 h-16" />
-      <div className="flex flex-col items-center gap-8">
-        <div className="w-1/2 sm:w-64">
-          <img
-            className="rounded-lg w-full h-full"
-            src={qrCodeUrl}
-            alt="QRCode"
-          />
+    <div className="flex flex-col items-center gap-8 w-full">
+      <ArrowBigDown className="w-16 h-16 text-zinc-950" fill="currentColor" strokeWidth={1.2} />
+      <div className="flex flex-col items-center gap-8 w-full">
+        <div className="w-1/2 md:w-1/2">
+          <img className="rounded-lg w-full shadow-lg" src={qrCodeUrl} alt="QRCode" />
         </div>
         <button
-          className="w-full bg-zinc-50 text-zinc-900 hover:bg-purple-700 hover:text-zinc-50 text-sm sm:text-md"
+          className="w-6/7 sm:w-1/2 bg-zinc-50 text-zinc-900 hover:bg-zinc-900 hover:text-zinc-50 text-sm sm:text-md shadow-lg"
           onClick={handleDownload}
         >
           Baixar

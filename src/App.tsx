@@ -35,26 +35,27 @@ function App() {
   }
 
   return (
-    <div className="flex items-center flex-col px-4 pt-4 pb-8">
-      <h1 className="font-bold text-zinc-50 mb-10 text-center">
-        Gerador de QRCode para WI-FI
-      </h1>
-      <div className="flex flex-col lg:flex-row gap-8 items-center">
-        <div className="w-full sm:w-64">
-          <QRCodeForm
-            data={formData}
-            setData={setFormData}
-            noPass={formData.noPass ? true : false}
-            handleSubmit={handleSubmit}
-          />
-        </div>
+    <div className="min-h-screen flex justify-center px-4 py-8">
+      <div className="w-full max-w-5xl">
+        <h1 className="font-bold text-zinc-100 mb-8 md:mb-12 text-3xl md:text-4xl text-center">
+          Gerador de QRCode para WI-FI
+        </h1>
+        <div className="flex flex-col gap-6 md:gap-12 items-center justify-center">
+            <QRCodeForm
+              data={formData}
+              setData={setFormData}
+              noPass={formData.noPass ? true : false}
+              handleSubmit={handleSubmit}
+            />
 
-        {qrCodeUrl && (
-          <QRCodeDisplay
-            handleDownload={handleDownload}
-            qrCodeUrl={qrCodeUrl}
-          />
-        )}
+
+          {qrCodeUrl && (
+            <QRCodeDisplay
+              handleDownload={handleDownload}
+              qrCodeUrl={qrCodeUrl}
+            />
+          )}
+        </div>
       </div>
     </div>
   );
