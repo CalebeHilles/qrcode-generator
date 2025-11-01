@@ -1,5 +1,5 @@
 @import "tailwindcss";
-
+  
 :root {
   --bg-2: #f9f9f9;
   --fg-2: #1a1a1a;
@@ -8,7 +8,7 @@
   font-weight: 600;
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background: linear-gradient(to bottom right, #2b0b2d, #be1abe);
+  background: linear-gradient(to bottom right, #1a1a1a, #1a1a11);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;

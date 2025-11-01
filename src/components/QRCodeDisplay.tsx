@@ -9,7 +9,7 @@ export default function QRCodeDisplay({
 }) {
   return (
     <div className="flex flex-col items-center gap-8 w-full">
-      <ArrowBigDown className="w-16 h-16 text-zinc-950" fill="currentColor" strokeWidth={1.2} />
+      <ArrowBigDown className="w-16 h-16 text-zinc-200" fill="" strokeWidth={1.2} />
       <div className="flex flex-col items-center gap-8 w-full">
         <div className="w-1/2 md:w-1/2">
           <img className="rounded-lg w-full shadow-lg" src={qrCodeUrl} alt="QRCode" />
