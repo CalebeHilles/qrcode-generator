@@ -50,6 +50,7 @@ export default function QRCodeForm({
           key={input.key}
           formData={formData[input.key]}
           onChange={(value) => setData({ ...formData, [input.key]: value })}
+          onInputClean={() => setData({ ...formData, [input.key]: "" })}
           label={input.label}
           placeholder={input.placeholder}
           noPass={input.noPass}
