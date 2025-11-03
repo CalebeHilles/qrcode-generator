@@ -2,11 +2,11 @@ import { HelpCircle } from "lucide-react";
 
 export default function Checkbox({
   label,
-  data,
+  formData,
   onChange,
 }: {
   label: string;
-  data: boolean;
+  formData: boolean;
   onChange: (value: boolean) => void;
 }) {
   return (
@@ -15,7 +15,7 @@ export default function Checkbox({
         <label className="flex items-center gap-2 cursor-pointer w-fit">
           <input
             type="checkbox"
-            checked={data}
+            checked={formData}
             className="w-4 h-4 cursor-pointer"
             onChange={(e) => onChange(e.target.checked)}
           />

@@ -3,12 +3,12 @@ import Checkbox from "../components/Checkbox";
 import TextInput from "../components/TextInput";
 
 export default function QRCodeForm({
-  data,
+  formData,
   setData,
   noPass,
   handleSubmit,
 }: {
-  data: FormData;
+  formData: FormData;
   setData: SetFormData;
   noPass: boolean;
   handleSubmit: (e: React.FormEvent<Element>) => Promise<void>;
@@ -48,8 +48,8 @@ export default function QRCodeForm({
       {textInputs.map((input) => (
         <TextInput
           key={input.key}
-          data={data[input.key]}
-          onChange={(value) => setData({ ...data, [input.key]: value })}
+          formData={formData[input.key]}
+          onChange={(value) => setData({ ...formData, [input.key]: value })}
           label={input.label}
           placeholder={input.placeholder}
           noPass={input.noPass}
@@ -59,14 +59,14 @@ export default function QRCodeForm({
         {checkboxes.map((checkbox) => (
           <Checkbox
             key={checkbox.key}
-            data={data[checkbox.key]}
-            onChange={(value) => setData({ ...data, [checkbox.key]: value })}
+            formData={formData[checkbox.key]}
+            onChange={(value) => setData({ ...formData, [checkbox.key]: value })}
             label={checkbox.label}
           />
         ))}
       </div>
       <button
-        className="text-zinc-100 bg-zinc-900 hover:bg-purple-700 text-sm sm:text-md"
+        className="text-zinc-100 bg-zinc-900 hover:bg-purple-700 text-sm sm:text-md py-2.5"
         type="submit"
       >
         Gerar

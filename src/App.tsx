@@ -42,12 +42,11 @@ function App() {
         </h1>
         <div className="flex flex-col gap-6 md:gap-12 items-center justify-center">
             <QRCodeForm
-              data={formData}
+              formData={formData}
               setData={setFormData}
               noPass={formData.noPass ? true : false}
               handleSubmit={handleSubmit}
             />
-
 
           {qrCodeUrl && (
             <QRCodeDisplay

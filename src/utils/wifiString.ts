@@ -1,11 +1,11 @@
 import type { FormData, WifiConfig } from "../types";
 
-export function formDataToWifiConfig(data: FormData): WifiConfig {
+export function formDataToWifiConfig(formData: FormData): WifiConfig {
   return {
-    ssid: data.ssid,
-    securityType: data.noPass ? "nopass" : "WPA",
-    pass: data.noPass ? "" : data.pass,
-    isHidden: data.hidden,
+    ssid: formData.ssid,
+    securityType: formData.noPass ? "nopass" : "WPA",
+    pass: formData.noPass ? "" : formData.pass,
+    isHidden: formData.hidden,
   };
 }
 

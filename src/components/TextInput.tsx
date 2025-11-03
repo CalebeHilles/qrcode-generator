@@ -1,13 +1,13 @@
 export default function TextInput({
   label,
   placeholder,
-  data,
+  formData,
   noPass,
   onChange,
 }: {
   label: string;
   placeholder: string;
-  data: string;
+  formData: string;
   noPass: boolean;
   onChange: (value: string) => void;
 }) {
@@ -15,7 +15,7 @@ export default function TextInput({
     <div className="flex flex-col gap-1 text-xs sm:text-sm">
       <label className="text-neutral-700">{label}:</label>
       <input
-        value={data}
+        value={formData}
         onChange={(e) => onChange(e.target.value)}
         className="rounded-md border pl-1.5 p-0.5"
         type="text"
