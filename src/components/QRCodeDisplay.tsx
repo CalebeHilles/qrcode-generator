@@ -15,7 +15,7 @@ export default function QRCodeDisplay({
           <img className="rounded-lg w-full shadow-lg" src={qrCodeUrl} alt="QRCode" />
         </div>
         <button
-          className="w-6/7 sm:w-1/2 bg-zinc-50 text-zinc-900 hover:bg-zinc-900 hover:text-zinc-50 text-sm sm:text-md shadow-lg py-2.5"
+          className="w-6/7 sm:w-1/2 bg-zinc-50 text-zinc-900 hover:bg-purple-700 hover:text-zinc-50 text-sm sm:text-md shadow-lg py-2.5"
           onClick={handleDownload}
         >
           Baixar
