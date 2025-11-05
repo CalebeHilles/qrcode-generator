@@ -44,7 +44,7 @@ function App() {
             <QRCodeForm
               formData={formData}
               setData={setFormData}
-              noPass={formData.noPass ? true : false}
+              noPass={formData.noPass}
               handleSubmit={handleSubmit}
             />
 
