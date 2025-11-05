@@ -51,6 +51,7 @@ export default function QRCodeForm({
           formData={formData[input.key]}
           onChange={(value) => setData({ ...formData, [input.key]: value })}
           onInputClean={() => setData({ ...formData, [input.key]: "" })}
+          shouldRenderClearBtn={formData[input.key].length > 0}
           label={input.label}
           placeholder={input.placeholder}
           noPass={input.noPass}
@@ -61,7 +62,9 @@ export default function QRCodeForm({
           <Checkbox
             key={checkbox.key}
             formData={formData[checkbox.key]}
-            onChange={(value) => setData({ ...formData, [checkbox.key]: value })}
+            onChange={(value) =>
+              setData({ ...formData, [checkbox.key]: value })
+            }
             label={checkbox.label}
           />
         ))}

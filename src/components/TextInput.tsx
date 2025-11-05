@@ -7,6 +7,7 @@ export default function TextInput({
   noPass,
   onChange,
   onInputClean,
+  shouldRenderClearBtn,
 }: {
   label: string;
   placeholder: string;
@@ -14,6 +15,7 @@ export default function TextInput({
   noPass: boolean;
   onChange: (value: string) => void;
   onInputClean: () => void;
+  shouldRenderClearBtn: boolean;
 }) {
   return noPass ? null : (
     <div className="flex flex-col gap-1 text-xs sm:text-sm">
@@ -27,9 +29,11 @@ export default function TextInput({
           placeholder={placeholder}
           required
         />
-        <button onClick={() => onInputClean()} type="button">
-          <X />
-        </button>
+        {shouldRenderClearBtn ? (
+          <button onClick={() => onInputClean()} type="button">
+            <X />
+          </button>
+        ) : null}
       </div>
     </div>
   );
