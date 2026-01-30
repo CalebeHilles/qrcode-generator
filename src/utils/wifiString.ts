@@ -10,5 +10,5 @@ export function formDataToWifiConfig(formData: FormData): WifiConfig {
 }
 
 export default function generateWifiString(config: WifiConfig): string {
-  return `WIFI:T:${config.securityType};S:${config.ssid};P:${config.pass};H:${config.isHidden}`;
+  return `WIFI:T:${config.securityType};S:${config.ssid};P:${config.pass};H:${config.isHidden ? "true " : "false"};;`;
 }
