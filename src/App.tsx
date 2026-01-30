@@ -3,11 +3,16 @@ import "./App.css";
 import "./types";
 import type { FormData } from "./types";
 import QRCodeForm from "./components/QRCodeForm";
-import generateWifiString, { formDataToWifiConfig } from "./utils/wifiString";
+import { generateWifiString, formDataToWifiConfig } from "./utils/wifiString";
 import * as QRCode from "qrcode";
 import QRCodeDisplay from "./components/QRCodeDisplay";
 
 function App() {
+  const qrCodeLayout = {
+    width: 400,
+    margin: 2,
+  };
+
   const [qrCodeUrl, setQrCodeUrl] = useState("");
   const [formData, setFormData] = useState<FormData>({
     ssid: "",
@@ -20,9 +25,10 @@ function App() {
     e.preventDefault();
     const wifiConfig = formDataToWifiConfig(formData);
     const wifiString = generateWifiString(wifiConfig);
+
     const url = await QRCode.toDataURL(wifiString, {
-      width: 400,
-      margin: 2,
+      width: qrCodeLayout.width,
+      margin: qrCodeLayout.margin,
     });
     setQrCodeUrl(url);
   }
@@ -41,12 +47,12 @@ function App() {
           Gerador de QRCode para WI-FI
         </h1>
         <div className="flex flex-col gap-6 md:gap-12 items-center justify-center">
-            <QRCodeForm
-              formData={formData}
-              setData={setFormData}
-              noPass={formData.noPass}
-              handleSubmit={handleSubmit}
-            />
+          <QRCodeForm
+            formData={formData}
+            setData={setFormData}
+            noPass={formData.noPass}
+            handleSubmit={handleSubmit}
+          />
 
           {qrCodeUrl && (
             <QRCodeDisplay
