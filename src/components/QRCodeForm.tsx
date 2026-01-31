@@ -1,4 +1,4 @@
-import type { FormData, SetFormData } from "../types";
+import type { Errors, FormData, SetFormData } from "../types";
 import Checkbox from "../components/Checkbox";
 import TextInput from "../components/TextInput";
 
@@ -7,11 +7,13 @@ export default function QRCodeForm({
   setData,
   noPass,
   handleSubmit,
+  errors,
 }: {
   formData: FormData;
   setData: SetFormData;
   noPass: boolean;
   handleSubmit: (e: React.FormEvent<Element>) => Promise<void>;
+  errors: Errors;
 }) {
   const textInputs = [
     {
@@ -19,12 +21,14 @@ export default function QRCodeForm({
       label: "Nome da rede (SSID)",
       placeholder: "Digite o nome da rede",
       noPass: false,
+      errors: errors.ssidError,
     },
     {
       key: "pass" as const,
       label: "Senha",
       placeholder: "Digite a senha",
       noPass: noPass,
+      errors: errors.passError,
     },
   ];
 
@@ -46,16 +50,21 @@ export default function QRCodeForm({
     >
       <h3 className="text-md sm:text-lg text-zinc-900">Criar QRcode</h3>
       {textInputs.map((input) => (
-        <TextInput
-          key={input.key}
-          formData={formData[input.key]}
-          onChange={(value) => setData({ ...formData, [input.key]: value })}
-          onInputClean={() => setData({ ...formData, [input.key]: "" })}
-          shouldRenderClearBtn={formData[input.key].length > 0}
-          label={input.label}
-          placeholder={input.placeholder}
-          noPass={input.noPass}
-        />
+        <div>
+          <TextInput
+            key={input.key}
+            formData={formData[input.key]}
+            onChange={(value) => setData({ ...formData, [input.key]: value })}
+            onInputClean={() => setData({ ...formData, [input.key]: "" })}
+            shouldRenderClearBtn={formData[input.key].length > 0}
+            label={input.label}
+            placeholder={input.placeholder}
+            noPass={input.noPass}
+          />
+          {input.errors.map((error) => (
+            <p className="text-red-500 text-sm">*{error}</p>
+          ))}
+        </div>
       ))}
       <div>
         {checkboxes.map((checkbox) => (

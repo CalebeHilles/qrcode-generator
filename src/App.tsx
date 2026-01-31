@@ -1,9 +1,13 @@
 import React, { useState } from "react";
 import "./App.css";
 import "./types";
-import type { FormData } from "./types";
+import type { FormData, Errors } from "./types";
 import QRCodeForm from "./components/QRCodeForm";
-import { generateWifiString, formDataToWifiConfig } from "./utils/wifiString";
+import {
+  generateWifiString,
+  formDataToWifiConfig,
+  validateWifiConfig,
+} from "./utils/wifiString";
 import * as QRCode from "qrcode";
 import QRCodeDisplay from "./components/QRCodeDisplay";
 
@@ -13,6 +17,10 @@ function App() {
     margin: 2,
   };
 
+  const [errors, setErrors] = useState<Errors>({
+    ssidError: [],
+    passError: [],
+  });
   const [qrCodeUrl, setQrCodeUrl] = useState("");
   const [formData, setFormData] = useState<FormData>({
     ssid: "",
@@ -24,13 +32,23 @@ function App() {
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     const wifiConfig = formDataToWifiConfig(formData);
-    const wifiString = generateWifiString(wifiConfig);
+    const validationErrors = validateWifiConfig(wifiConfig);
 
-    const url = await QRCode.toDataURL(wifiString, {
-      width: qrCodeLayout.width,
-      margin: qrCodeLayout.margin,
-    });
-    setQrCodeUrl(url);
+    if (
+      validationErrors.ssidError.length > 0 ||
+      validationErrors.passError.length > 0
+    )
+      setErrors(validationErrors);
+    else {
+      setErrors({ ssidError: [], passError: [] });
+      const wifiString = generateWifiString(wifiConfig);
+
+      const url = await QRCode.toDataURL(wifiString, {
+        width: qrCodeLayout.width,
+        margin: qrCodeLayout.margin,
+      });
+      setQrCodeUrl(url);
+    }
   }
 
   function handleDownload() {
@@ -52,6 +70,7 @@ function App() {
             setData={setFormData}
             noPass={formData.noPass}
             handleSubmit={handleSubmit}
+            errors={errors}
           />
 
           {qrCodeUrl && (
