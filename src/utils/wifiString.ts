@@ -24,3 +24,34 @@ export function generateWifiString(config: WifiConfig): string {
 
   return `WIFI:T:${config.securityType};S:${ssid};P:${pass};H:${config.isHidden ? "true" : "false"};;`;
 }
+
+export function validateWifiConfig(config: WifiConfig) {
+  function validateField(field: string, minLength: number, maxLength: number) {
+    const errors = [];
+    const errorMessages = {
+      requiredField: "Campo obrigatório",
+      minLength: "O campo deve conter ao menos " + minLength + " caracteres",
+      maxLength:
+        "Tamanho do campo não deve ser superior a " + maxLength + " caracteres",
+    };
+
+    if (field.length < 1) errors.push(errorMessages.requiredField);
+    if (field.length < minLength) errors.push(errorMessages.minLength);
+    if (field.length > maxLength) errors.push(errorMessages.maxLength);
+
+    return errors;
+  }
+
+  const ssidError = validateField(config.ssid, 1, 32);
+  let passError: string[] = [];
+
+  if (config.securityType === "WPA")
+    passError = validateField(config.pass, 8, 63);
+
+  const errors = {
+    ssidError: ssidError,
+    passError: passError,
+  };
+
+  return errors;
+}
