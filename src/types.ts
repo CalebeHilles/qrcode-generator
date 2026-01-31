@@ -15,3 +15,8 @@ export interface WifiConfig {
 }
 
 export type SetFormData = React.Dispatch<React.SetStateAction<FormData>>;
+
+export interface Errors {
+  ssidError: Array<string>;
+  passError: Array<string>;
+}
