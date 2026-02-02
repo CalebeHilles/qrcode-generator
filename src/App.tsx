@@ -43,11 +43,18 @@ function App() {
       setErrors({ ssidError: [], passError: [] });
       const wifiString = generateWifiString(wifiConfig);
 
-      const url = await QRCode.toDataURL(wifiString, {
-        width: qrCodeLayout.width,
-        margin: qrCodeLayout.margin,
-      });
-      setQrCodeUrl(url);
+      try {
+        const url = await QRCode.toDataURL(wifiString, {
+          width: qrCodeLayout.width,
+          margin: qrCodeLayout.margin,
+        });
+        setQrCodeUrl(url);
+      } catch (error) {
+        const errorMessage = "Erro ao gerar QR Code";
+
+        console.error(errorMessage, error);
+        alert(errorMessage);
+      }
     }
   }
 
