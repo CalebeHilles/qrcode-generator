@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import "./App.css";
 import "./types";
 import type { FormData, Errors } from "./types";
 import QRCodeForm from "./components/QRCodeForm";
