@@ -22,7 +22,7 @@ export default function Checkbox({
             focus:ring-0 focus:ring-offset-0 focus-visible:ring-1 focus-visible:ring-purple-500
             transition-all relative
             after:content-[''] after:absolute after:hidden after:checked:block
-            after:left-[5px] after:top-[2px] after:w-[4px] after:h-[8px]
+            after:left-[5px] after:top-0.5 after:w-1 after:h-2
             after:border-white after:border-b-2 after:border-r-2 after:rotate-45
           "
           onChange={(e) => onChange(e.target.checked)}
