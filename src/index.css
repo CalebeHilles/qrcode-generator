@@ -25,9 +25,6 @@ a:hover {
   color: #535bf2;
 }
 
-form {
-  background-color: var(--bg-2);
-}
 
 body {
   margin: 0;
