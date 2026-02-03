@@ -1,6 +1,8 @@
+import type React from "react";
 import type { Errors, FormData, SetFormData } from "../types";
 import Checkbox from "../components/Checkbox";
 import TextInput from "../components/TextInput";
+import { AlertCircle } from "lucide-react";
 
 export default function QRCodeForm({
   formData,
@@ -19,14 +21,14 @@ export default function QRCodeForm({
     {
       key: "ssid" as const,
       label: "Nome da rede (SSID)",
-      placeholder: "Digite o nome da rede",
+      placeholder: "Ex: Minha Casa 2.4G",
       noPass: false,
       errors: errors.ssidError,
     },
     {
       key: "pass" as const,
       label: "Senha",
-      placeholder: "Digite a senha",
+      placeholder: "••••••••",
       noPass: noPass,
       errors: errors.passError,
     },
@@ -35,55 +37,81 @@ export default function QRCodeForm({
   const checkboxes = [
     {
       key: "noPass" as const,
-      label: "Sem senha",
+      label: "Rede sem senha",
     },
     {
       key: "hidden" as const,
-      label: "Oculta",
+      label: "Rede oculta",
     },
   ];
 
   return (
     <form
       onSubmit={handleSubmit}
-      className="flex flex-col justify-center p-8 sm:p-8 md:py-16 rounded-md shadow-lg h-full w-6/7 sm:w-1/2 shadow-zinc-950 gap-4"
+      className="flex flex-col w-full max-w-md mx-auto bg-zinc-900/50 border border-zinc-800 p-8 rounded-3xl backdrop-blur-sm shadow-2xl space-y-6"
     >
-      <h3 className="text-md sm:text-lg text-zinc-900">Criar QRcode</h3>
-      {textInputs.map((input) => (
-        <div>
-          <TextInput
-            key={input.key}
-            formData={formData[input.key]}
-            onChange={(value) => setData({ ...formData, [input.key]: value })}
-            onInputClean={() => setData({ ...formData, [input.key]: "" })}
-            shouldRenderClearBtn={formData[input.key].length > 0}
-            label={input.label}
-            placeholder={input.placeholder}
-            noPass={input.noPass}
-          />
-          {input.errors.map((error) => (
-            <p className="text-red-500 text-sm">*{error}</p>
-          ))}
-        </div>
-      ))}
-      <div>
-        {checkboxes.map((checkbox) => (
-          <Checkbox
-            key={checkbox.key}
-            formData={formData[checkbox.key]}
-            onChange={(value) =>
-              setData({ ...formData, [checkbox.key]: value })
-            }
-            label={checkbox.label}
-          />
+      <div className="space-y-1 text-center sm:text-left">
+        <h3 className="text-zinc-50 text-xl font-semibold tracking-tight">
+          Configurar WiFi
+        </h3>
+        <p className="text-zinc-500 text-sm">
+          Insira os dados da rede para gerar o código.
+        </p>
+      </div>
+
+      <div className="w-full h-px bg-linear-to-r from-transparent via-zinc-700 to-transparent opacity-50" />
+
+      <div className="space-y-5">
+        {textInputs.map((input) => (
+          <div key={input.key} className="flex flex-col gap-2">
+            <TextInput
+              formData={formData[input.key]}
+              onChange={(value) => setData({ ...formData, [input.key]: value })}
+              onInputClean={() => setData({ ...formData, [input.key]: "" })}
+              shouldRenderClearBtn={formData[input.key].length > 0}
+              label={input.label}
+              placeholder={input.placeholder}
+              noPass={input.noPass}
+            />
+            {input.errors.map((error, index) => (
+              <div
+                key={index}
+                className="flex items-center gap-1.5 text-red-400 text-xs animate-in fade-in slide-in-from-left-1"
+              >
+                <AlertCircle className="w-3.5 h-3.5" />
+                <span>{error}</span>
+              </div>
+            ))}
+          </div>
         ))}
       </div>
-      <button
-        className="text-zinc-100 bg-zinc-900 hover:bg-purple-700 text-sm sm:text-md py-2.5"
-        type="submit"
-      >
-        Gerar
-      </button>
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 py-2">
+        {checkboxes.map((checkbox) => (
+          <div
+            key={checkbox.key}
+            className="transition-opacity duration-300 opacity-90 hover:opacity-100"
+          >
+            <Checkbox
+              formData={formData[checkbox.key]}
+              onChange={(value) =>
+                setData({ ...formData, [checkbox.key]: value })
+              }
+              label={checkbox.label}
+            />
+          </div>
+        ))}
+      </div>
+
+      <div className="pt-2">
+        <button
+          className="group relative flex items-center justify-center gap-2 w-full bg-purple-600 hover:bg-purple-500 text-white font-bold py-3.5 rounded-xl transition-all duration-300 shadow-[0_0_20px_rgba(147,51,234,0.3)] active:scale-[0.98]"
+          type="submit"
+        >
+          Gerar QR Code
+          <div className="absolute inset-0 rounded-xl bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
+        </button>
+      </div>
     </form>
   );
 }
