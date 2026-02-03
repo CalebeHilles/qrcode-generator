@@ -17,6 +17,9 @@ function App() {
     margin: 2,
   };
 
+  const [shouldRenderForm, setShouldRenderForm] = useState<"form" | "qrcode">(
+    "form",
+  );
   const [errors, setErrors] = useState<Errors>({
     ssidError: [],
     passError: [],
@@ -48,6 +51,7 @@ function App() {
           width: qrCodeLayout.width,
           margin: qrCodeLayout.margin,
         });
+        setShouldRenderForm("qrcode");
         setQrCodeUrl(url);
       } catch (error) {
         const errorMessage = "Erro ao gerar QR Code";
@@ -72,18 +76,23 @@ function App() {
           Gerador de QRCode para WI-FI
         </h1>
         <div className="flex flex-col gap-6 md:gap-12 items-center justify-center">
-          <QRCodeForm
-            formData={formData}
-            setData={setFormData}
-            noPass={formData.noPass}
-            handleSubmit={handleSubmit}
-            errors={errors}
-          />
+          {shouldRenderForm === "form" && (
+            <QRCodeForm
+              formData={formData}
+              setData={setFormData}
+              noPass={formData.noPass}
+              handleSubmit={handleSubmit}
+              errors={errors}
+            />
+          )}
 
-          {qrCodeUrl && (
+          {shouldRenderForm === "qrcode" && (
             <QRCodeDisplay
               handleDownload={handleDownload}
               qrCodeUrl={qrCodeUrl}
+              setShouldRenderForm={setShouldRenderForm}
+              setFormData={setFormData}
+              formData={formData}
             />
           )}
         </div>
