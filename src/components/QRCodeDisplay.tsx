@@ -12,13 +12,13 @@ import {
 export default function QRCodeDisplay({
   handleDownload,
   qrCodeUrl,
-  setShouldRenderForm,
+  setDisplayMode,
   formData,
   setFormData,
 }: {
   handleDownload: () => void;
   qrCodeUrl: string;
-  setShouldRenderForm: React.Dispatch<React.SetStateAction<"form" | "qrcode">>;
+  setDisplayMode: React.Dispatch<React.SetStateAction<"form" | "qrcode">>;
   formData: FormData;
   setFormData: SetFormData;
 }) {
@@ -95,7 +95,7 @@ export default function QRCodeDisplay({
 
         <button
           onClick={() => {
-            setShouldRenderForm("form");
+            setDisplayMode("form");
             setFormData({ ssid: "", pass: "", noPass: false, hidden: false });
           }}
           className="flex items-center justify-center gap-2 w-full bg-transparent text-zinc-400 hover:text-zinc-100 hover:bg-zinc-800/50 transition-all duration-300 text-sm py-3 rounded-xl"

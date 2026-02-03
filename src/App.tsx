@@ -18,7 +18,7 @@ function App() {
     margin: 2,
   };
 
-  const [shouldRenderForm, setShouldRenderForm] = useState<"form" | "qrcode">(
+  const [displayMode, setDisplayMode] = useState<"form" | "qrcode">(
     "form",
   );
   const [errors, setErrors] = useState<Errors>({
@@ -56,7 +56,7 @@ function App() {
             light: "#ffffff",
           },
         });
-        setShouldRenderForm("qrcode");
+        setDisplayMode("qrcode");
         setQrCodeUrl(url);
       } catch (error) {
         console.error("Erro ao gerar QR Code", error);
@@ -92,7 +92,7 @@ function App() {
         </header>
 
         <main className="w-full transition-all duration-500 ease-in-out">
-          {shouldRenderForm === "form" ? (
+          {displayMode === "form" ? (
             <div className="animate-in fade-in zoom-in-95 duration-500">
               <QRCodeForm
                 formData={formData}
@@ -107,7 +107,7 @@ function App() {
               <QRCodeDisplay
                 handleDownload={handleDownload}
                 qrCodeUrl={qrCodeUrl}
-                setShouldRenderForm={setShouldRenderForm}
+                setDisplayMode={setDisplayMode}
                 setFormData={setFormData}
                 formData={formData}
               />
