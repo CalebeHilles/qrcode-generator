@@ -1,5 +1,3 @@
-import { HelpCircle } from "lucide-react";
-
 export default function Checkbox({
   label,
   formData,
@@ -31,7 +29,6 @@ export default function Checkbox({
           {label}
         </span>
       </label>
-      <HelpCircle className="w-4 h-4 text-zinc-600" />
     </div>
   );
 }
