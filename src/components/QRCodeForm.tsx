@@ -7,13 +7,11 @@ import { AlertCircle } from "lucide-react";
 export default function QRCodeForm({
   formData,
   setData,
-  noPass,
   handleSubmit,
   errors,
 }: {
   formData: FormData;
   setData: SetFormData;
-  noPass: boolean;
   handleSubmit: (e: React.FormEvent<Element>) => Promise<void>;
   errors: Errors;
 }) {
@@ -29,7 +27,7 @@ export default function QRCodeForm({
       key: "pass" as const,
       label: "Senha",
       placeholder: "••••••••",
-      noPass: noPass,
+      noPass: formData.noPass,
       errors: errors.passError,
     },
   ];

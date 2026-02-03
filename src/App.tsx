@@ -97,7 +97,6 @@ function App() {
               <QRCodeForm
                 formData={formData}
                 setData={setFormData}
-                noPass={formData.noPass}
                 handleSubmit={handleSubmit}
                 errors={errors}
               />
