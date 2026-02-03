@@ -1,3 +1,4 @@
+import { validationRules } from "../constants";
 import type { FormData, WifiConfig } from "../types";
 
 export function formDataToWifiConfig(formData: FormData): WifiConfig {
@@ -42,11 +43,19 @@ export function validateWifiConfig(config: WifiConfig) {
     return errors;
   }
 
-  const ssidError = validateField(config.ssid, 1, 32);
+  const ssidError = validateField(
+    config.ssid,
+    validationRules.ssid.minLength,
+    validationRules.ssid.maxLength,
+  );
   let passError: string[] = [];
 
   if (config.securityType === "WPA")
-    passError = validateField(config.pass, 8, 63);
+    passError = validateField(
+      config.pass,
+      validationRules.pass.minLength,
+      validationRules.pass.maxLength,
+    );
 
   const errors = {
     ssidError: ssidError,
