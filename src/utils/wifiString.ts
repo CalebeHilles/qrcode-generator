@@ -35,9 +35,9 @@ export function validateWifiConfig(config: WifiConfig) {
         "Tamanho do campo não deve ser superior a " + maxLength + " caracteres",
     };
 
-    if (field.length < 1) errors.push(errorMessages.requiredField);
     if (field.length < minLength) errors.push(errorMessages.minLength);
-    if (field.length > maxLength) errors.push(errorMessages.maxLength);
+    else if (field.length < 1) errors.push(errorMessages.requiredField);
+    else if (field.length > maxLength) errors.push(errorMessages.maxLength);
 
     return errors;
   }
