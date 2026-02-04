@@ -1,4 +1,5 @@
 import type React from "react";
+import type useWifiQRCode from "./hooks/useWifiQRCode";
 
 export interface FormData {
   ssid: string;
@@ -20,3 +21,5 @@ export interface Errors {
   ssidError: Array<string>;
   passError: Array<string>;
 }
+
+export type WifiQRCodeHook = ReturnType<typeof useWifiQRCode>;
