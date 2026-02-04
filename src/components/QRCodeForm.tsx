@@ -1,34 +1,23 @@
-import type React from "react";
-import type { Errors, FormData, SetFormData } from "../types";
+import type { WifiQRCodeHook } from "../types";
 import Checkbox from "../components/Checkbox";
 import TextInput from "../components/TextInput";
 import { AlertCircle } from "lucide-react";
 
-export default function QRCodeForm({
-  formData,
-  setData,
-  handleSubmit,
-  errors,
-}: {
-  formData: FormData;
-  setData: SetFormData;
-  handleSubmit: (e: React.FormEvent<Element>) => Promise<void>;
-  errors: Errors;
-}) {
+export default function QRCodeForm({ hookData }: { hookData: WifiQRCodeHook }) {
   const textInputs = [
     {
       key: "ssid" as const,
       label: "Nome da rede (SSID)",
       placeholder: "Ex: Minha Casa 2.4G",
       noPass: false,
-      errors: errors.ssidError,
+      errors: hookData.errors.ssidError,
     },
     {
       key: "pass" as const,
       label: "Senha",
       placeholder: "••••••••",
-      noPass: formData.noPass,
-      errors: errors.passError,
+      noPass: hookData.formData.noPass,
+      errors: hookData.errors.passError,
     },
   ];
 
@@ -45,7 +34,7 @@ export default function QRCodeForm({
 
   return (
     <form
-      onSubmit={handleSubmit}
+      onSubmit={hookData.handleSubmit}
       className="flex flex-col w-full max-w-md mx-auto bg-zinc-900/50 border border-zinc-800 p-8 rounded-3xl backdrop-blur-sm shadow-2xl space-y-6"
     >
       <div className="space-y-1 text-center sm:text-left">
@@ -63,10 +52,10 @@ export default function QRCodeForm({
         {textInputs.map((input) => (
           <div key={input.key} className="flex flex-col gap-2">
             <TextInput
-              formData={formData[input.key]}
-              onChange={(value) => setData({ ...formData, [input.key]: value })}
-              onInputClean={() => setData({ ...formData, [input.key]: "" })}
-              shouldRenderClearBtn={formData[input.key].length > 0}
+              formData={hookData.formData[input.key]}
+              onChange={(value) => hookData.onChange(input.key, value)}
+              onInputClean={() => hookData.onInputClean(input.key)}
+              shouldRenderClearBtn={hookData.formData[input.key].length > 0}
               label={input.label}
               placeholder={input.placeholder}
               noPass={input.noPass}
@@ -91,10 +80,8 @@ export default function QRCodeForm({
             className="transition-opacity duration-300 opacity-90 hover:opacity-100"
           >
             <Checkbox
-              formData={formData[checkbox.key]}
-              onChange={(value) =>
-                setData({ ...formData, [checkbox.key]: value })
-              }
+              formData={hookData.formData[checkbox.key]}
+              onChange={(value) => hookData.onChange(checkbox.key, value)}
               label={checkbox.label}
             />
           </div>

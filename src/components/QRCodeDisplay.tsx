@@ -1,5 +1,4 @@
-import type React from "react";
-import type { FormData, SetFormData } from "../types";
+import type { WifiQRCodeHook } from "../types";
 import {
   Download,
   RefreshCw,
@@ -10,17 +9,9 @@ import {
 } from "lucide-react";
 
 export default function QRCodeDisplay({
-  handleDownload,
-  qrCodeUrl,
-  setDisplayMode,
-  formData,
-  setFormData,
+  hookData,
 }: {
-  handleDownload: () => void;
-  qrCodeUrl: string;
-  setDisplayMode: React.Dispatch<React.SetStateAction<"form" | "qrcode">>;
-  formData: FormData;
-  setFormData: SetFormData;
+  hookData: WifiQRCodeHook;
 }) {
   return (
     <div className="flex flex-col items-center w-full max-w-md mx-auto bg-zinc-900/50 border border-zinc-800 p-8 rounded-3xl backdrop-blur-sm shadow-2xl">
@@ -39,17 +30,19 @@ export default function QRCodeDisplay({
             <Wifi className="w-4 h-4 text-purple-500" />
             <p className="text-zinc-400 text-sm">
               <span className="text-zinc-500 mr-1">SSID:</span>
-              <span className="text-zinc-100 font-medium">{formData.ssid}</span>
+              <span className="text-zinc-100 font-medium">
+                {hookData.formData.ssid}
+              </span>
             </p>
           </div>
 
-          {!formData.noPass ? (
+          {!hookData.formData.noPass ? (
             <div className="flex items-center gap-3">
               <Lock className="w-4 h-4 text-purple-500" />
               <p className="text-zinc-400 text-sm">
                 <span className="text-zinc-500 mr-1">Senha:</span>
                 <span className="text-zinc-100 font-mono tracking-wider">
-                  {formData.pass}
+                  {hookData.formData.pass}
                 </span>
               </p>
             </div>
@@ -62,7 +55,7 @@ export default function QRCodeDisplay({
             </div>
           )}
 
-          {formData.hidden && (
+          {hookData.formData.hidden && (
             <div className="flex items-center gap-3">
               <EyeOff className="w-4 h-4 text-zinc-500" />
               <p className="text-zinc-500 text-xs uppercase tracking-widest">
@@ -78,7 +71,7 @@ export default function QRCodeDisplay({
         <div className="relative bg-white p-4 rounded-2xl shadow-inner">
           <img
             className="w-48 h-48 md:w-56 md:h-56 object-contain"
-            src={qrCodeUrl}
+            src={hookData.qrCodeUrl}
             alt="WiFi QR Code"
           />
         </div>
@@ -87,17 +80,14 @@ export default function QRCodeDisplay({
       <div className="w-full mt-10 space-y-3">
         <button
           className="group flex items-center justify-center gap-2 w-full bg-zinc-50 text-zinc-950 hover:bg-purple-600 hover:text-white transition-all duration-300 font-bold py-3.5 rounded-xl shadow-[0_0_20px_rgba(255,255,255,0.05)]"
-          onClick={handleDownload}
+          onClick={hookData.handleDownload}
         >
           <Download className="w-5 h-5 group-hover:bounce" />
           Baixar Imagem
         </button>
 
         <button
-          onClick={() => {
-            setDisplayMode("form");
-            setFormData({ ssid: "", pass: "", noPass: false, hidden: false });
-          }}
+          onClick={hookData.newQRCode}
           className="flex items-center justify-center gap-2 w-full bg-transparent text-zinc-400 hover:text-zinc-100 hover:bg-zinc-800/50 transition-all duration-300 text-sm py-3 rounded-xl"
         >
           <RefreshCw className="w-4 h-4" />
